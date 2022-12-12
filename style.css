@@ -1,0 +1,91 @@
+body {
+    background-color: #222222;
+    color: white;
+    font-family: Comic Sans MS;
+}
+
+#tittle {
+    text-align: center;
+    font-size: 2em;
+}
+#divInput {
+    width: 100%;
+}
+#inputText {
+    width: 80%;
+    height: 30px;
+    font-size: 20px;
+    border-radius: 5px;
+}
+#inputButton {
+    width: 18%;
+    height: 30px;
+    font-size: 20px;
+    border-radius: 5px;
+}
+/* nota */
+.note {
+    background-color: #303030;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid gray;
+}
+.note__firts {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.note__title {
+    flex-grow: 1;
+}
+.note__checked {
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+.note__delete--button {
+    background-color: #303030;
+    border: none;
+}
+.note__delete--button img{
+    width: 30px;
+}
+.note__second {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.note__priority {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.note__checked--checked {
+    background-image: url(./img/check.png);
+    background-size: cover;
+}
+.note__title--checked {
+    text-decoration: line-through;
+    color: green;
+}
+.note__priority--button--low {
+    background-color: #ff0000;
+    font-weight: bold;
+    display: flex;
+}
+.note__priority--button--normal {
+    background-color: #ff8800;
+    font-weight: bold;
+}
+.note__priority--button--high {
+    background-color: #00ff00;
+    font-weight: bold;
+    display: flex;
+}
+.note__priority--button {
+    display: flex;
+}
+.flechas {
+    width: 10px;
+}
