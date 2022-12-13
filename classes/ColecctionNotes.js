@@ -40,7 +40,7 @@ class ColecctionNotes {
                             <button class='note__priority--button${this.notes[i].priority == 'high' ? '--'+this.notes[i].priority : ''}' id='${this.notes[i].id}' value='high'><img src='./img/flecha_arriba.png' class='flechas'>High</button>
                         </div>
                         <div class='note__date'>
-                            <p id='p${this.notes[i].id}'>${this.calculateTime(this.notes[i].id)}</p>
+                            <p id='p${this.notes[i].id}'>Cargando...${this.calculateTime(this.notes[i].id)}</p>
                         </div>
                     </div>
                 </div>
@@ -51,9 +51,29 @@ class ColecctionNotes {
         this.notes[id].priority = newPriority;
         localStorage.setItem('notes', JSON.stringify(this.notes));
     }
+    orderNotesForPriority() {
+        document.getElementById("notes").innerHTML = "";
+        this.notes.sort(function (a, b) {
+            if (a.prioridad === 'high' && b.prioridad === 'normal') {
+                return -1
+            } else if (a.prioridad === 'high' && b.prioridad === 'low') {
+                return -1
+            } else if (a.prioridad === 'normal' && b.prioridad === 'low') {
+                return -1
+            } else if (a.prioridad === 'normal' && b.prioridad === 'high') {
+                return 1
+            } else if (a.prioridad === 'low' && b.prioridad === 'high') {
+                return 1
+            } else if (a.prioridad === 'low' && b.prioridad === 'normal') {
+                return 1
+            } else {
+                return 0
+            }
+        });
+        localStorage.setItem('notes', JSON.stringify(this.notes));
+    }
+        
     calculateTime(id) {
-        // cogiendo la fecha de la nota calcula un intervalo para saber hace cuanto se creo
-        // y lo devuelve en un string
         setInterval(() => {
             let date = new Date(this.notes[id].date);
             let now = new Date();
@@ -72,6 +92,7 @@ class ColecctionNotes {
                 document.getElementById('p'+id).innerHTML = `Añadido hace ${seconds} segundos`;
             }
         }, 1000);
+        return "";
             
     }
 }

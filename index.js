@@ -5,6 +5,16 @@ window.onload = function () {
     let inputButton = document.getElementById("inputButton");
     coleccion.getNotes();
     start(coleccion);
+    document.getElementById('inputText').addEventListener("keypress", (e) => {
+        if (e.key == "Enter") {
+            let inputText = document.getElementById("inputText")
+            let nota = new Note(inputText.value);
+            inputText.value = "";
+            coleccion.addNotes(nota);
+            document.getElementById("notes").innerHTML = "";
+            start(coleccion);
+        }
+    });
     inputButton.addEventListener("click", function () {
         let inputText = document.getElementById("inputText")
         let nota = new Note(inputText.value);
@@ -15,6 +25,7 @@ window.onload = function () {
     });
 }
 function start(coleccion) {
+    coleccion.orderNotesForPriority();
     coleccion.showNotes();
     checkedAll(coleccion);
     deleteAll(coleccion);
