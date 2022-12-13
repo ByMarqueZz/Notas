@@ -40,7 +40,7 @@ class ColecctionNotes {
                             <button class='note__priority--button${this.notes[i].priority == 'high' ? '--'+this.notes[i].priority : ''}' id='${this.notes[i].id}' value='high'><img src='./img/flecha_arriba.png' class='flechas'>High</button>
                         </div>
                         <div class='note__date'>
-                            <p>${this.notes[i].date}</p>
+                            <p id='p${this.notes[i].id}'>${this.calculateTime(this.notes[i].id)}</p>
                         </div>
                     </div>
                 </div>
@@ -50,6 +50,29 @@ class ColecctionNotes {
     changePriority(id, newPriority) {
         this.notes[id].priority = newPriority;
         localStorage.setItem('notes', JSON.stringify(this.notes));
+    }
+    calculateTime(id) {
+        // cogiendo la fecha de la nota calcula un intervalo para saber hace cuanto se creo
+        // y lo devuelve en un string
+        setInterval(() => {
+            let date = new Date(this.notes[id].date);
+            let now = new Date();
+            let time = now - date;
+            let days = Math.floor(time / (1000 * 60 * 60 * 24));
+            let hours = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let minutes = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+            let seconds = Math.floor((time % (1000 * 60)) / 1000);
+            if (days > 0) {
+                document.getElementById('p'+id).innerHTML = `Añadido hace ${days} días`;
+            } else if (hours > 0) {
+                document.getElementById('p'+id).innerHTML = `Añadido hace ${hours} horas`;
+            } else if (minutes > 0) {
+                document.getElementById('p'+id).innerHTML = `Añadido hace ${minutes} minutos`;
+            } else if (seconds > 0) {
+                document.getElementById('p'+id).innerHTML = `Añadido hace ${seconds} segundos`;
+            }
+        }, 1000);
+            
     }
 }
 export { ColecctionNotes };
